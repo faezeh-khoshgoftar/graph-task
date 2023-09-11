@@ -1,0 +1,65 @@
+.bottom-open {
+  animation: btmopen 1s;
+  animation-fill-mode: forwards;
+}
+@keyframes btmopen {
+  from {
+    transform: translate(0px, 0px) rotateX(180deg);
+  }
+  to {
+    transform: translate(0px, 180px);
+  }
+}
+
+.bottom-close {
+  animation: btmclose 1s;
+  animation-fill-mode: forwards;
+}
+@keyframes btmclose {
+  from {
+    transform: translate(0px, 180px) rotateX(180deg);
+  }
+  to {
+    transform: translate(0px, 0px);
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .margin {
+    animation: margin 1s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes margin {
+    from {
+      margin-bottom: 0px;
+    }
+    to {
+      margin-bottom: 180px;
+    }
+  }
+
+  .no-margin {
+    animation: nomargin 1s;
+    animation-fill-mode: forwards;
+  }
+  @keyframes nomargin {
+    from {
+      margin-bottom: 180px;
+    }
+    to {
+      margin-bottom: 0px;
+    }
+  }
+}
+
+.circle {
+  animation: circle 1s infinite;
+}
+@keyframes circle {
+  from {
+    transform: translateX(0px);
+  }
+  to {
+    transform: translateX(-20px);
+  }
+}

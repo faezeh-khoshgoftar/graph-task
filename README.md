@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+This is a fake backend written in nodejs with fairly simple auth and everything with timeseries and pie chart output.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To prepare the project. Run "npm install" and to run the server run "node index.js"
 
-## Available Scripts
+This backend has 5 function calls, they all return a json with a field called "result" it may contain more than one field.
 
-In the project directory, you can run:
+/login (POST)
+You should send the default username and password (admin/123456) to the backend via a post request that is "x-www-form-urlencoded". If the login is successful, it will return a json containing a "token" item. "token" should be treated similar to a RESTFUL token.
+Example:
+{
+    "token": "dD8cVbWjKnACxpN3pvp4k2wCToEwNVXn",
+    "result": "success"
+}
 
-### `npm start`
+* For all other requests, you should have an authorization header that is in the form "Authorization" : "Bearer dD8cVbWjKnACxpN3pvp4k2wCToEwNVXn" assuming dD8cVbWjKnACxpN3pvp4k2wCToEwNVXn is returned by /login as "token".
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+/logout (POST)
+Should have the authorization header. Assuming the above example, it should have the "Authorization" : "Bearer dD8cVbWjKnACxpN3pvp4k2wCToEwNVXn" header.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+/username
+If authorization header is right, you will get:
+{
+    "username": "admin",
+    "result": "success"
+}
+otherwise:
+{
+    "result": "unauthorized"
+}
 
-### `npm test`
+/list
+Return an array of flight data if the authorization header is correct.
+Example:
+{
+    total: 10,
+    result: [
+        {
+            logoSrc: "https://beebom.com/wp-content/uploads/2018/12/Singapore-Airlines-logo.jpg",
+            logoStyle: {
+                height: "46px",
+                margin: "22px 15px"
+            },
+            src: {
+                country: 'Rwanda',
+                iso3: 'RWA',
+                time: '2021-05-28T09:35:11.523Z',
+                airline: 'Kempegowda International'
+            },
+            dst: {
+                country: 'Burkina Faso',
+                iso3: 'BFA',
+                time: '2021-05-28T11:22:27.523Z',
+                airline: 'Indira Gandhi International'
+            },
+            boarding: '34848', // [secound]
+            transfer: false,
+            gates: 7,
+            seat: '16A',
+            price: '2000',
+            class: 'economy'
+        },
+        ...
+    ]
+}
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+All Code is Copyright of DSHasin (داده سنجی حصین)
